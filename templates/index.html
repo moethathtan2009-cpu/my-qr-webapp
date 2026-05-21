@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Creator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #1e1e1e;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h1 { color: #00adb5; margin-bottom: 20px; }
+        label { display: block; text-align: left; margin: 10px 0 5px; color: #aaaaaa; }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #2d2d2d;
+            color: #fff;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #00adb5;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover { background-color: #007a80; }
+        .result { margin-top: 20px; }
+        .result img { max-width: 100%; border-radius: 8px; border: 5px solid white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>QR Code Creator</h1>
+    <form action="/generate" method="POST">
+        <label>QR Code ထဲထည့်မည့် Link သို့မဟုတ် စာသား:</label>
+        <input type="text" name="user_input" placeholder="https://..." required>
+        
+        <label>ပုံသိမ်းမည့် အမည်:</label>
+        <input type="text" name="file_name" placeholder="myqr" required>
+        
+        <button type="submit">QR Code ထုတ်မည်</button>
+    </form>
+
+    {% if qr_image %}
+    <div class="result">
+        <h3>အောင်မြင်ပါပြီ။</h3>
+        <img src="/static/{{ qr_image }}" alt="QR Code">
+        <p style="color:#00adb5;">{{ qr_image }} အမည်ဖြင့် static folder ထဲတွင် သိမ်းဆည်းပြီးပါပြီ။</p>
+    </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
